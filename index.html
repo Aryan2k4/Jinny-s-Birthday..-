@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happiest Birthday Jinnyyyyyy✨</title>
+
+<style>
+/* ===== GLOBAL ===== */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #fde7f3, #f3ecff);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Soft floating sparkles (friend-safe) */
+.sparkle {
+  position: absolute;
+  bottom: -20px;
+  font-size: 14px;
+  opacity: 0.25;
+  animation: floatUp 22s linear infinite;
+}
+@keyframes floatUp {
+  from { transform: translateY(0); }
+  to { transform: translateY(-120vh); }
+}
+
+/* ===== SCREENS ===== */
+.screen {
+  position: absolute;
+  width: 92%;
+  max-width: 520px;
+  background: rgba(255,255,255,0.96);
+  padding: 32px;
+  border-radius: 24px;
+  box-shadow: 0 25px 55px rgba(0,0,0,0.16);
+  text-align: center;
+  opacity: 0;
+  transform: translateY(24px);
+  pointer-events: none;
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+
+.screen.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+h1 {
+  color: #c23c7a;
+  margin-bottom: 12px;
+}
+
+p {
+  font-size: 15px;
+  line-height: 1.8;
+  color: #444;
+}
+
+/* ===== BUTTONS ===== */
+button {
+  background: linear-gradient(135deg, #c23c7a, #e06fa5);
+  color: white;
+  border: none;
+  padding: 13px 26px;
+  border-radius: 28px;
+  cursor: pointer;
+  margin-top: 18px;
+  font-size: 15px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 8px 20px rgba(194,60,122,0.3);
+}
+
+button:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 28px rgba(194,60,122,0.4);
+}
+
+.choices button {
+  width: 100%;
+  margin-top: 12px;
+}
+
+/* ===== ENVELOPE ===== */
+.envelope {
+  width: 280px;
+  height: 180px;
+  margin: 25px auto;
+  position: relative;
+  perspective: 1200px;
+  cursor: pointer;
+}
+
+.envelope-base {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  border-radius: 0 0 18px 18px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+}
+
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #f5b6d2;
+  clip-path: polygon(0 0, 100% 0, 50% 58%);
+  transform-origin: top;
+  transition: transform 1.4s cubic-bezier(.2,.8,.2,1);
+  z-index: 2;
+}
+
+.envelope.open .envelope-flap {
+  transform: rotateX(-165deg);
+}
+
+.envelope.open {
+  opacity: 0.55;
+  transform: scale(0.96);
+  transition: 1.2s ease;
+}
+
+/* ===== LETTER CARD ===== */
+.letter-card {
+  position: absolute;
+  width: 92%;
+  max-width: 420px;
+  background: #fffdf8;
+  padding: 28px;
+  border-radius: 22px;
+  box-shadow: 0 22px 50px rgba(0,0,0,0.25);
+  opacity: 0;
+  transform: translateY(45px);
+  transition: opacity 1.2s ease, transform 1.2s ease;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.letter-card.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Letter sections */
+.section {
+  margin-top: 18px;
+  padding: 14px;
+  border-radius: 14px;
+  background: #ffffff;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.section:hover {
+  background: #f6f1ff;
+  transform: translateY(-1px);
+}
+
+.section-title {
+  font-weight: 600;
+}
+
+.section-content {
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 1.7;
+  display: none;
+}
+
+.section.open .section-content {
+  display: block;
+}
+
+/* Signature */
+.signature {
+  margin-top: 24px;
+  font-weight: bold;
+  color: #c23c7a;
+  text-align: right;
+}
+
+/* ===== NAV ===== */
+#navControls {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+#navControls button {
+  background: rgba(255,255,255,0.9);
+  color: #c23c7a;
+  border: 2px solid #c23c7a;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Sparkles -->
+<script>
+const sparkles = ["🌟","🧸","🍰"];
+for (let i = 0; i < 14; i++) {
+  const s = document.createElement("div");
+  s.className = "sparkle";
+  s.innerText = sparkles[Math.floor(Math.random()*sparkles.length)];
+  s.style.left = Math.random() * 100 + "vw";
+  s.style.animationDelay = Math.random() * 12 + "s";
+  document.body.appendChild(s);
+}
+</script>
+
+<!-- SCREEN 1 -->
+<div class="screen active" id="s1">
+  <h1>Hellooo Jii🌝</h1>
+  <p>I made something small and fun for your birthday, Hope so it will turn out to be as Good as maggi for you</p>
+  <button onclick="next('s1','s2')">Start 🎂</button>
+</div>
+
+<!-- SCREEN 2 -->
+<div class="screen" id="s2">
+  <h1>Quick check 💭</h1>
+  <p>SOOO, Kaise hai app?</p>
+  <div class="choices">
+    <button onclick="chooseMood('calm')">Calm as you had the best maggi ever and then go for nini🌿</button>
+    <button onclick="chooseMood('happy')">Happy! Happy! Happy!🎈</button>
+    <button onclick="chooseMood('tired')">Tired of bulk production☕</button>
+  </div>
+</div>
+
+<!-- SCREEN 3 -->
+<div class="screen" id="s3">
+  <h1>Got it ✨</h1>
+  <p id="moodText"></p>
+  <button onclick="next('s3','s_tease')">Continue </button>
+</div>
+
+<!-- TEASE SCREEN -->
+<div class="screen" id="s_tease">
+  <h1>One small task , Button pr click karo</h1>
+  <p>Click here Jinnu jii</p>
+
+  <div style="height:120px; position:relative;">
+    <button id="teaseBtn" style="position:absolute;">Tap me 🙂</button>
+  </div>
+
+  <p id="teaseMsg" style="font-size:14px; margin-top:65px;"></p>
+</div>
+
+<!-- ENVELOPE SCREEN -->
+<div class="screen" id="s4">
+  <h1>For the Birthday Girl! (Confidential)</h1>
+  <p>Now you can open it</p>
+  <div class="envelope" onclick="openEnvelope()">
+    <div class="envelope-flap"></div>
+    <div class="envelope-base"></div>
+  </div>
+</div>
+
+<!-- LETTER -->
+<div class="letter-card" id="letter">
+  <h1>Happyyyyyy walaa Birthday Jinnyyyyyy✨</h1>
+
+  <div class="section" onclick="toggle(this)">
+    <div class="section-title">📝 A small note</div>
+    <div class="section-content">
+      Mein dil se dua krta hu haar birthday ki tarah iss birthday tujhe bura na lage kisi baat ka aur tu khul kr celebrate kr pae apna yeh pyara sa din.
+    </div>
+  </div>
+
+  <div class="section" onclick="toggle(this)">
+    <div class="section-title">🌱 Something I appreciate</div>
+    <div class="section-content">
+      Mein kuch bada chada kar nahi bol rha pr jis positivity se tu rhti hai na , kaash sab vo apna paate. Wo sach mein ek khoobsurat quality hai jo har kisi me nahi hoti.
+      And uss positivity ko apne se dur mt hone dena , you have soo much to achieve and give to the world.
+    </div>
+  </div>
+
+  <div class="section" onclick="toggle(this)">
+    <div class="section-title">🎂 A simple wish</div>
+    <div class="section-content">
+      I hope today feels easy, warm, and genuinely nice for you.
+    </div>
+  </div>
+
+  <div class="signature">— From a Friend* of yours 🌝</div>
+</div>
+
+<!-- NAV -->
+<div id="navControls">
+  <button onclick="goBack()">⬅ Back</button>
+</div>
+
+<script>
+let history = ["s1"];
+let idx = 0;
+
+function show(id) {
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+}
+
+function next(from, to) {
+  history.push(to);
+  idx++;
+  show(to);
+}
+
+function goBack() {
+  if (idx > 0) {
+    idx--;
+    show(history[idx]);
+    document.getElementById("letter").classList.remove("active");
+  }
+}
+
+function chooseMood(m) {
+  document.getElementById("moodText").innerText =
+    m === "calm" ? "Aaj to best maggi wali feeling hai ,toh dinn toh ekdam smooth jaegaa.Isko aur smooth bnane ke liye momos bhi kha lejiyega" :
+    m === "happy" ? "Aaj kya , haar din esse hi happy happy rha karo ,SAMJHIIIIIIIII." :
+    "Jaise ab bulk production ka subject chla gya , yeh Dukh aur tiredness bhi chli jaegiii,So Chill birthday Girl.";
+  next("s2","s3");
+}
+
+/* Tease logic (mobile friendly) */
+let teaseCount = 0;
+const teaseBtn = document.getElementById("teaseBtn");
+const teaseMsg = document.getElementById("teaseMsg");
+
+function teaseMove(e) {
+  e.preventDefault();
+  teaseCount++;
+
+  if (teaseCount < 7) {
+    const x = Math.random() * 120 - 60;
+    const y = Math.random() * 40 - 20;
+    teaseBtn.style.transform = `translate(${x}px, ${y}px)`;
+    teaseMsg.innerText = "Kya yaar ek button click nahi ho paa rha😛 ";
+  } else {
+    teaseBtn.style.transform = "translate(0,0)";
+    teaseBtn.innerText = "Okay okay 😄";
+    teaseMsg.innerText = "Jeet gyi tum Champ.";
+
+    setTimeout(() => {
+      next("s_tease","s4");
+    }, 700);
+  }
+}
+
+teaseBtn.addEventListener("click", teaseMove);
+teaseBtn.addEventListener("touchstart", teaseMove);
+
+/* Envelope */
+function openEnvelope() {
+  document.querySelector(".envelope").classList.add("open");
+  setTimeout(() => {
+    document.getElementById("letter").classList.add("active");
+  }, 900);
+}
+
+function toggle(el) {
+  el.classList.toggle("open");
+}
+</script>
+
+</body>
+</html>
